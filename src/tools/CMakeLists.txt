@@ -21,4 +21,9 @@ if (GNU_COMPILER AND ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS "9.0" AND "cxx_s
 endif()
 add_dependencies(emissionsMap generate-version-h install_dll)
 
-install(TARGETS emissionsDrivingCycle emissionsMap RUNTIME DESTINATION bin)
+add_executable(cfKernelBenchmark cfKernelBenchmark_main.cpp)
+set_target_properties(cfKernelBenchmark PROPERTIES OUTPUT_NAME cfKernelBenchmark${BINARY_SUFFIX})
+set_target_properties(cfKernelBenchmark PROPERTIES OUTPUT_NAME_DEBUG cfKernelBenchmark${BINARY_SUFFIX}D)
+add_dependencies(cfKernelBenchmark generate-version-h install_dll)
+
+install(TARGETS emissionsDrivingCycle emissionsMap cfKernelBenchmark RUNTIME DESTINATION bin)
