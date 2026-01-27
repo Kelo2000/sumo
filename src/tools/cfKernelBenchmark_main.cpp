@@ -75,7 +75,9 @@ double runSimd(const sumo::cfkernel::Limits& limits,
                const std::vector<double>& leaderDecels,
                std::vector<double>& out) {
     const auto start = std::chrono::steady_clock::now();
+#ifdef _OPENMP
 #pragma omp simd
+#endif
     for (std::size_t i = 0; i < gaps.size(); ++i) {
         out[i] = sumo::cfkernel::maximumSafeFollowSpeed(
             gaps[i], speeds[i], leaderSpeeds[i], leaderDecels[i], false, limits);

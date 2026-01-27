@@ -24,6 +24,8 @@
 
 namespace sumo::cfkernel {
 
+constexpr double kEmergencyDecelAmplifier = 1.2;
+
 struct Limits {
     double decel;
     double emergencyDecel;
@@ -141,7 +143,7 @@ inline double maximumSafeFollowSpeed(double gap, double egoSpeed, double predSpe
     if (limits.decel != limits.emergencyDecel && !onInsertion && !limits.computeLC) {
         const double origSafeDecel = speedToAccel(egoSpeed - x, limits.timeStep);
         if (origSafeDecel > limits.decel + NUMERICAL_EPS) {
-            double safeDecel = EMERGENCY_DECEL_AMPLIFIER * calculateEmergencyDeceleration(gap, egoSpeed, predSpeed, predMaxDecel, limits);
+            double safeDecel = kEmergencyDecelAmplifier * calculateEmergencyDeceleration(gap, egoSpeed, predSpeed, predMaxDecel, limits);
             safeDecel = std::max(safeDecel, limits.decel);
             safeDecel = std::min(safeDecel, origSafeDecel);
             x = egoSpeed - accelToSpeed(safeDecel, limits.timeStep);
