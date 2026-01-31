@@ -26,6 +26,8 @@
 #include "MSCFModel_KraussOrig1.h"
 #include <utils/xml/SUMOXMLDefinitions.h>
 
+class SumoRNG;
+
 
 // ===========================================================================
 // class definitions
