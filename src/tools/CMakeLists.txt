@@ -24,6 +24,7 @@ add_dependencies(emissionsMap generate-version-h install_dll)
 add_executable(cfKernelBenchmark cfKernelBenchmark_main.cpp)
 set_target_properties(cfKernelBenchmark PROPERTIES OUTPUT_NAME cfKernelBenchmark${BINARY_SUFFIX})
 set_target_properties(cfKernelBenchmark PROPERTIES OUTPUT_NAME_DEBUG cfKernelBenchmark${BINARY_SUFFIX}D)
+target_link_libraries(cfKernelBenchmark microsim_cfmodels microsim utils_vehicle ${commonlibs} ${TCMALLOC_LIBRARY})
 add_dependencies(cfKernelBenchmark generate-version-h install_dll)
 
 install(TARGETS emissionsDrivingCycle emissionsMap cfKernelBenchmark RUNTIME DESTINATION bin)
