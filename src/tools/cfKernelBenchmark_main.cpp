@@ -28,11 +28,11 @@
 #include <vector>
 
 #include <microsim/cfmodels/MSCFKernel.h>
+#include <utils/common/RandHelper.h>
 #include <microsim/cfmodels/MSCFModel_Krauss.h>
 #include <microsim/MSGlobals.h>
 #include <microsim/MSVehicleType.h>
 #include <utils/common/SUMOTime.h>
-#include <utils/common/RandHelper.h>
 #include <utils/vehicle/SUMOVTypeParameter.h>
 #include <utils/xml/SUMOXMLDefinitions.h>
 
