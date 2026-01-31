@@ -32,6 +32,7 @@
 #include <microsim/MSGlobals.h>
 #include <microsim/MSVehicleType.h>
 #include <utils/common/SUMOTime.h>
+#include <utils/common/RandHelper.h>
 #include <utils/vehicle/SUMOVTypeParameter.h>
 #include <utils/xml/SUMOXMLDefinitions.h>
 
@@ -305,7 +306,6 @@ int main(int argc, char** argv) {
     const double scalarThroughput = cfg.batchSize / scalarAvg / 1e6;
     const double modelThroughput = cfg.batchSize / modelAvg / 1e6;
     const double simdThroughput = cfg.batchSize / simdAvg / 1e6;
-    const double intrinsicThroughput = intrinsicAvg > 0. ? cfg.batchSize / intrinsicAvg / 1e6 : 0.;
 
     std::cout << std::fixed << std::setprecision(6);
     std::cout << "CF kernel benchmark (" << (cfg.semiImplicitEuler ? "Euler" : "Ballistic")
@@ -316,6 +316,7 @@ int main(int argc, char** argv) {
     std::cout << "Max abs diff (kernel scalar vs MSCFModel): " << maxAbsDiff(outScalar, outModel) << "\n";
     std::cout << "Max abs diff (kernel SIMD vs MSCFModel): " << maxAbsDiff(outSimd, outModel) << "\n";
 #ifdef __AVX__
+    const double intrinsicThroughput = intrinsicAvg > 0. ? cfg.batchSize / intrinsicAvg / 1e6 : 0.;
     if (cfg.semiImplicitEuler) {
         std::cout << "Intrinsic avg: " << intrinsicAvg << " s, throughput: " << intrinsicThroughput << " Mveh/s\n";
         std::cout << "Max abs diff (intrinsic vs MSCFModel): " << maxAbsDiff(outIntrinsic, outModel) << "\n";
